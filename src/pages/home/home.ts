@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { NavController, Platform, AlertController } from 'ionic-angular';
 //declare var cordova: any;
 
 @Component({
@@ -8,8 +8,9 @@ import { NavController, Platform } from 'ionic-angular';
 })
 
 export class HomePage {
+  public todos = [];
 
-  constructor(public navCtrl: NavController, public platform: Platform) {
+  constructor(public navCtrl: NavController, public platform: Platform, private alertController: AlertController) {
     
     this.platform.ready().then(() => {
       /*cordova.plugins.notification.local.schedule({
@@ -25,5 +26,32 @@ export class HomePage {
         console.log("Le dio clic a No")
       })/**/
     })
+  }
+
+  openTodoAlert(){
+    let addTodoAlert = this.alertController.create({
+      title: "Add a Todo",
+      message: "Enter your Todo",
+      inputs: [
+        {
+          type: "text",
+          name: "addTodoInput"
+        }
+      ],
+      buttons: [
+        {
+          text: "Cancel"
+        },
+        {
+          text: "Add Todo",
+          handler: (inputData) => {
+            let todoText;
+            todoText = inputData.addTodoInput;
+            this.todos.push(todoText);
+          }
+        }
+      ]
+    });
+    addTodoAlert.present();
   }
 }

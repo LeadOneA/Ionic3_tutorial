@@ -54,9 +54,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 //declare var cordova: any;
 var HomePage = /** @class */ (function () {
-    function HomePage(navCtrl, platform) {
+    function HomePage(navCtrl, platform, alertController) {
         this.navCtrl = navCtrl;
         this.platform = platform;
+        this.alertController = alertController;
+        this.todos = [];
         this.platform.ready().then(function () {
             /*cordova.plugins.notification.local.schedule({
               title: 'My first notification',
@@ -72,13 +74,41 @@ var HomePage = /** @class */ (function () {
             })/**/
         });
     }
+    HomePage.prototype.openTodoAlert = function () {
+        var _this = this;
+        var addTodoAlert = this.alertController.create({
+            title: "Add a Todo",
+            message: "Enter your Todo",
+            inputs: [
+                {
+                    type: "text",
+                    name: "addTodoInput"
+                }
+            ],
+            buttons: [
+                {
+                    text: "Cancel"
+                },
+                {
+                    text: "Add Todo",
+                    handler: function (inputData) {
+                        var todoText;
+                        todoText = inputData.addTodoInput;
+                        _this.todos.push(todoText);
+                    }
+                }
+            ]
+        });
+        addTodoAlert.present();
+    };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/juanpabloavilagarza/Desktop/Ionic3_tutorial/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Notifications\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item-sliding>\n      <ion-item>Todo 1</ion-item>\n      <ion-item-options side="right">\n        <button color="danger" ion-button>\n          <ion-icon name="trash"></ion-icon>\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n    <ion-item>Todo 2</ion-item>\n    <ion-item>Todo 3</ion-item>\n    <ion-item>Todo 4</ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/juanpabloavilagarza/Desktop/Ionic3_tutorial/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/juanpabloavilagarza/Desktop/Ionic3_tutorial/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Ionic Tutorial\n    </ion-title>\n    <ion-buttons>\n      <button end>\n        <button ion-button (click)="openTodoAlert()">\n          <ion-icon name="add"></ion-icon>\n        </button>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item-sliding *ngFor="let todo of todos">\n      <ion-item>{{todo}}</ion-item>\n      <ion-item-options side="right">\n        <button color="danger" ion-button>\n          <ion-icon name="trash"></ion-icon>\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/juanpabloavilagarza/Desktop/Ionic3_tutorial/src/pages/home/home.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object])
     ], HomePage);
     return HomePage;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -135,11 +165,11 @@ var AppModule = /** @class */ (function () {
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
+                __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */], {}, {
                     links: []
                 })
             ],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicApp */]],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
             entryComponents: [
                 __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* MyApp */],
                 __WEBPACK_IMPORTED_MODULE_6__pages_home_home__["a" /* HomePage */]
@@ -147,7 +177,7 @@ var AppModule = /** @class */ (function () {
             providers: [
                 __WEBPACK_IMPORTED_MODULE_4__ionic_native_status_bar__["a" /* StatusBar */],
                 __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
-                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicErrorHandler */] }
+                { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["u" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] }
             ]
         })
     ], AppModule);
@@ -195,7 +225,7 @@ var MyApp = /** @class */ (function () {
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/juanpabloavilagarza/Desktop/Ionic3_tutorial/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/juanpabloavilagarza/Desktop/Ionic3_tutorial/src/app/app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
     return MyApp;
 }());
