@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { NavController, Platform, AlertController } from 'ionic-angular';
 //declare var cordova: any;
 
+import { TodoProvider } from "../../providers/todo/todo";
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -10,10 +13,12 @@ import { NavController, Platform, AlertController } from 'ionic-angular';
 export class HomePage {
   public todos = [];
 
-  constructor(public navCtrl: NavController, public platform: Platform, private alertController: AlertController) {
-    
+  constructor(private todoProvider: TodoProvider, public navCtrl: NavController, public platform: Platform, private alertController: AlertController) {
+    this.todos = this.todoProvider.getTodos();
+
+    /*
     this.platform.ready().then(() => {
-      /*cordova.plugins.notification.local.schedule({
+      cordova.plugins.notification.local.schedule({
         title: 'My first notification',
         text: 'Thats pretty easy...',
         actions: [{ id: 'yes', title: 'Yes' },{ id: 'no', title: 'No' }],
@@ -24,8 +29,8 @@ export class HomePage {
       })
       cordova.plugins.notification.local.on('no', function (notification, eopts) {
         console.log("Le dio clic a No")
-      })/**/
-    })
+      })
+    })/**/
   }
 
   openTodoAlert(){
@@ -47,7 +52,7 @@ export class HomePage {
           handler: (inputData) => {
             let todoText;
             todoText = inputData.addTodoInput;
-            this.todos.push(todoText);
+            this.todoProvider.addTodo(todoText);
           }
         }
       ]
