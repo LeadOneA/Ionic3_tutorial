@@ -52,28 +52,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
+//declare var cordova: any;
 var HomePage = /** @class */ (function () {
     function HomePage(navCtrl, platform) {
         this.navCtrl = navCtrl;
         this.platform = platform;
         this.platform.ready().then(function () {
-            cordova.plugins.notification.local.schedule({
-                title: 'My first notification',
-                text: 'Thats pretty easy...',
-                actions: [{ id: 'yes', title: 'Yes' }, { id: 'no', title: 'No' }],
-                foreground: true
-            });
+            /*cordova.plugins.notification.local.schedule({
+              title: 'My first notification',
+              text: 'Thats pretty easy...',
+              actions: [{ id: 'yes', title: 'Yes' },{ id: 'no', title: 'No' }],
+              foreground: true
+            })
             cordova.plugins.notification.local.on('yes', function (notification, eopts) {
-                console.log("Le dio clic a Yes");
-            });
+              console.log("Le dio clic a Yes")
+            })
             cordova.plugins.notification.local.on('no', function (notification, eopts) {
-                console.log("Le dio clic a No");
-            });
+              console.log("Le dio clic a No")
+            })/**/
         });
     }
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/Users/juanpabloavilagarza/Desktop/NotificationTest/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Notifications\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <<ion-list>\n    <ion-item>Todo 1</ion-item>\n    <ion-item>Todo 2</ion-item>\n    <ion-item>Todo 3</ion-item>\n    <ion-item>Todo 4</ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/juanpabloavilagarza/Desktop/NotificationTest/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"/Users/juanpabloavilagarza/Desktop/Ionic3_tutorial/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Notifications\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item-sliding>\n      <ion-item>Todo 1</ion-item>\n      <ion-item-options side="right">\n        <button color="danger" ion-button>\n          <ion-icon name="trash"></ion-icon>\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n    <ion-item>Todo 2</ion-item>\n    <ion-item>Todo 3</ion-item>\n    <ion-item>Todo 4</ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Users/juanpabloavilagarza/Desktop/Ionic3_tutorial/src/pages/home/home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */]])
     ], HomePage);
@@ -192,7 +193,7 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/juanpabloavilagarza/Desktop/NotificationTest/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/juanpabloavilagarza/Desktop/NotificationTest/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/Users/juanpabloavilagarza/Desktop/Ionic3_tutorial/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Users/juanpabloavilagarza/Desktop/Ionic3_tutorial/src/app/app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
