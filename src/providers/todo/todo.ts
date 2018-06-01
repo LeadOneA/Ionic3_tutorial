@@ -11,17 +11,17 @@ import "rxjs/add/operator/map"
 */
 @Injectable()
 export class TodoProvider {
-  private todos = [];
+  private notes = ["Adam call for ...", "Emilia ask for hangout."];
 
   constructor(public http: Http) {
-    console.log('Hello TodoProvider Provider');
+    
   }
 
-  getTodos(){
-    return this.todos;
+  getNotes(){
+    return this.notes;
   }
 
-  addTodo(todo){
-    this.todos.push(todo);
+  addNote(note){
+    this.notes.push(note);
   }
 }

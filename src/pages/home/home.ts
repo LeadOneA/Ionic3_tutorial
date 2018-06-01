@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { NavController, Platform, AlertController } from 'ionic-angular';
-//declare var cordova: any;
-
+import { ListProvider } from "../../providers/list/list";
 import { TodoProvider } from "../../providers/todo/todo";
+import { NotificationsProvider } from "../../providers/notifications/notifications";
+import { AlertProvider } from "../../providers/alert/alert";
+import { ToasterProvider } from "../../providers/toaster/toaster";
 
 
 @Component({
@@ -11,52 +13,24 @@ import { TodoProvider } from "../../providers/todo/todo";
 })
 
 export class HomePage {
-  public todos = [];
+  constructor(
+    private notificationsProvider: NotificationsProvider, 
+    private listProvider: ListProvider, 
+    private todoProvider: TodoProvider, 
+    private alertProvider: AlertProvider,
+    private toasterProvider: ToasterProvider,
+    public navCtrl: NavController, 
+    public platform: Platform, 
+    private alertController: AlertController ) {
 
-  constructor(private todoProvider: TodoProvider, public navCtrl: NavController, public platform: Platform, private alertController: AlertController) {
-    this.todos = this.todoProvider.getTodos();
-
-    /*
-    this.platform.ready().then(() => {
-      cordova.plugins.notification.local.schedule({
-        title: 'My first notification',
-        text: 'Thats pretty easy...',
-        actions: [{ id: 'yes', title: 'Yes' },{ id: 'no', title: 'No' }],
-        foreground: true
-      })
-      cordova.plugins.notification.local.on('yes', function (notification, eopts) {
-        console.log("Le dio clic a Yes")
-      })
-      cordova.plugins.notification.local.on('no', function (notification, eopts) {
-        console.log("Le dio clic a No")
-      })
-    })/**/
   }
 
-  openTodoAlert(){
-    let addTodoAlert = this.alertController.create({
-      title: "Add a Todo",
-      message: "Enter your Todo",
-      inputs: [
-        {
-          type: "text",
-          name: "addTodoInput"
-        }
-      ],
-      buttons: [
-        {
-          text: "Cancel"
-        },
-        {
-          text: "Add Todo",
-          handler: (inputData) => {
-            let todoText;
-            todoText = inputData.addTodoInput;
-            this.todoProvider.addTodo(todoText);
-          }
-        }
-      ]
-    });
-    addTodoAlert.present();
+  AddNoteAlert(){
+    this.alertProvider.showAlert(this).present();
+  }
+
+  showNotification(){
+    this.notificationsProvider.show("Incoming Call", "+1 555 1234466");
+    this.toasterProvider.presentSimpleToast('{ CallerId: "+1 555 1234466" }',"bottom")
   }
 }

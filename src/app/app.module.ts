@@ -8,6 +8,10 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { TodoProvider } from '../providers/todo/todo';
+import { NotificationsProvider } from '../providers/notifications/notifications';
+import { AlertProvider } from '../providers/alert/alert';
+import { ListProvider } from '../providers/list/list';
+import { ToasterProvider } from '../providers/toaster/toaster';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { TodoProvider } from '../providers/todo/todo';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TodoProvider
+    TodoProvider,
+    NotificationsProvider,
+    AlertProvider,
+    ListProvider,
+    ToasterProvider
   ]
 })
 export class AppModule {}

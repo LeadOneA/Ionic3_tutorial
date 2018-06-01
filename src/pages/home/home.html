@@ -5,8 +5,13 @@
     </ion-title>
     <ion-buttons>
       <button end>
-        <button ion-button (click)="openTodoAlert()">
+        <button ion-button (click)="AddNoteAlert()">
           <ion-icon name="add"></ion-icon>
+        </button>
+      </button>
+      <button end>
+        <button ion-button (click)="showNotification()">
+          <ion-icon name="notifications"></ion-icon>
         </button>
       </button>
     </ion-buttons>
@@ -15,7 +20,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item-sliding *ngFor="let todo of todos">
+    <ion-item-sliding *ngFor="let todo of this.todoProvider.getNotes()">
       <ion-item>{{todo}}</ion-item>
       <ion-item-options side="right">
         <button color="danger" ion-button>
