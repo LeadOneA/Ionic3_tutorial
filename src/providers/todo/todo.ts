@@ -11,7 +11,15 @@ import "rxjs/add/operator/map"
 */
 @Injectable()
 export class TodoProvider {
-  private notes = ["Adam call for ...", "Emilia ask for hangout."];
+  private notes = [
+      {
+        "callerName": "Marty McFly",
+        "phone": "(555) 212-1234",
+        "logTime": "5/22/ 6:30 AM",
+        "duration": "13 minutes",
+        "note": ""
+      }
+    ];
 
   constructor(public http: Http) {
     

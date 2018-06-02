@@ -30,7 +30,7 @@ export class HomePage {
   }
 
   showNotification(){
-    this.notificationsProvider.show("Incoming Call", "+1 555 1234466");
-    this.toasterProvider.presentSimpleToast('{ CallerId: "+1 555 1234466" }',"bottom")
+    this.notificationsProvider.show(this, "Incoming Call", "Jack Black - (555) 260-1532");
+    this.toasterProvider.presentSimpleToast('{ CallerId: "(555) 260-1532" }',"bottom")
   }
 }

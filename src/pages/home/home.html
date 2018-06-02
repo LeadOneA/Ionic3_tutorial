@@ -1,14 +1,9 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Tutorial
+      Call Log
     </ion-title>
     <ion-buttons>
-      <button end>
-        <button ion-button (click)="AddNoteAlert()">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </button>
       <button end>
         <button ion-button (click)="showNotification()">
           <ion-icon name="notifications"></ion-icon>
@@ -20,8 +15,48 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item-sliding *ngFor="let todo of this.todoProvider.getNotes()">
-      <ion-item>{{todo}}</ion-item>
+    <ion-item-sliding *ngFor="let log of this.todoProvider.getNotes()">
+      <ion-item style="padding-left:0;" class="card-item">
+        <ion-card>
+          <ion-card-header>
+            <ion-row>
+              <ion-col col-md-6>
+                <h2>{{log.callerName}}</h2>
+                <p>{{log.phone}}</p>
+              </ion-col>
+              <ion-col col-md-6 right style="text-align:right">
+                <ion-note>{{log.logTime}} <br/>{{log.duration}}</ion-note>
+              </ion-col>
+            </ion-row>
+          </ion-card-header>
+          <ion-card-content style="width: 100%">
+            <div style="width: 100%;white-space: normal">
+              <h4><b>Note:</b></h4>
+              {{log.note}}
+            </div>
+          </ion-card-content>
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="call"></ion-icon>
+                <div>Call</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small (click)="AddNoteAlert()">
+                <ion-icon name="create"></ion-icon>
+                <div>Note</div>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button icon-left clear small>
+                <ion-icon name="contact"></ion-icon>
+                <div>Create Contact</div>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-item>
       <ion-item-options side="right">
         <button color="danger" ion-button>
           <ion-icon name="trash"></ion-icon>

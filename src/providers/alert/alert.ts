@@ -26,9 +26,9 @@ export class AlertProvider {
         {
           text: "Save",
           handler: (inputData) => {
-            let noteText;
-            noteText = inputData.addTodoInput;
-            page.todoProvider.addNote(noteText);
+            //let noteText;
+            //noteText = inputData.addTodoInput;
+            //page.todoProvider.addNote(noteText);
           }
         }
       ]
