@@ -77,8 +77,8 @@ var HomePage = /** @class */ (function () {
         this.alertProvider.showAlert(this).present();
     };
     HomePage.prototype.showNotification = function () {
-        this.notificationsProvider.show("Incoming Call", "+1 555 1234466");
-        this.toasterProvider.presentSimpleToast('{ CallerId: "+1 555 1234466" }', "bottom");
+        this.notificationsProvider.show(this, "Incoming Call", "Jack Black - (555) 260-1532");
+        this.toasterProvider.presentSimpleToast('{ CallerId: "(555) 260-1532" }', "bottom");
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
@@ -222,7 +222,7 @@ var NotificationsProvider = /** @class */ (function () {
     function NotificationsProvider(http) {
         this.http = http;
     }
-    NotificationsProvider.prototype.show = function (title, text) {
+    NotificationsProvider.prototype.show = function (page, title, text) {
         cordova.plugins.notification.local.schedule({
             title: title,
             text: text,
@@ -230,11 +230,18 @@ var NotificationsProvider = /** @class */ (function () {
             foreground: true
         });
         cordova.plugins.notification.local.on('yes', function (notification, eopts) {
-            // DO SOMETHING
+            var noteText;
+            page.todoProvider.addNote({
+                "callerName": "Jack Black",
+                "phone": "(555) 260-1532",
+                "logTime": "5/23/ 4:30 PM",
+                "duration": "1 hour 33 minutes",
+                "note": ""
+            });
         });
         cordova.plugins.notification.local.on('no', function (notification, eopts) {
             // DO SOMETHING
-        });
+        }); /**/
     };
     NotificationsProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
